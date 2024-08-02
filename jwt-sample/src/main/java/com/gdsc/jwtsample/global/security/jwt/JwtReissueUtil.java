@@ -19,21 +19,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class JwtReissueUtil {
+public class JwtReissueUtil { // 토큰 관리자
 
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
 
-    public TokenResponse reissue(String refreshToken) {
+    public TokenResponse reissue(String refreshToken) { // 토큰 재발행(리프레시 토큰)
 
-        if(!isRefreshToken(refreshToken)) {
+        if(!isRefreshToken(refreshToken)) { // token이 refreshToken인지 확인
             throw new JwtException("not refreshToken");
         }
 
         String accountId = getId(refreshToken);
 
-        return TokenResponse.builder()
+        return TokenResponse.builder() // 토큰 제작
                 .accescToken(jwtTokenProvider.createAccessToken(accountId))
                 .refreshToken(refreshToken)
                 .build();
@@ -57,11 +57,11 @@ public class JwtReissueUtil {
         }
     }
 
-    private boolean isRefreshToken(String token) {
+    private boolean isRefreshToken(String token) { // refresh 토큰인지 확인
         return getClaims(token).get("type").equals("refresh");
     }
 
-    public Authentication getAuthentication(String token) {
+    public Authentication getAuthentication(String token) { // 토큰 유효성 확인
         Claims claims = getClaims(token);
         UserDetails userDetails = authDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());

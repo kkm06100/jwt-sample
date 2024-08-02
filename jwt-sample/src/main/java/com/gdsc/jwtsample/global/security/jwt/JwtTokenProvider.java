@@ -15,11 +15,12 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
-public class JwtTokenProvider {
+public class JwtTokenProvider { // token 공급자
+
 
     private final JwtProperties jwtProperties;
     private final RefreshTokenRepository refreshTokenRepository;
-
+    // 토큰 생성
     public TokenResponse createToken(String accountId) {
         return TokenResponse
                 .builder()
@@ -28,7 +29,7 @@ public class JwtTokenProvider {
                 .build();
     }
 
-    // JWT 토큰 생성
+    // refresh 토큰으로 access 토큰 생성
     public String createAccessToken(String accountId) {
         Claims claims = Jwts.claims().setSubject(accountId);
         Date now = new Date();
@@ -40,7 +41,7 @@ public class JwtTokenProvider {
                 .compact();
 
     }
-
+    // refreshToken 생성
     private String createRefreshToken(String accountId) {
 
         Date now = new Date();
@@ -62,7 +63,7 @@ public class JwtTokenProvider {
 
         return refreshToken;
     }
-
+    // 토큰 받을 때
     public String resolveToken(HttpServletRequest request) {
 
         String bearerToken = request.getHeader(jwtProperties.getHeader());
@@ -74,7 +75,7 @@ public class JwtTokenProvider {
         return null;
     }
 
-    //토큰에서 회원 정보 추출
+    // 파싱 진행
     private Claims getBody(String token) {
         try {
             return Jwts.parser().setSigningKey(jwtProperties.getSecretKey()).parseClaimsJws(token).getBody();

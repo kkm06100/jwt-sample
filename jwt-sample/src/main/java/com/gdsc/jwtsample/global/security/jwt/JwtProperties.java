@@ -9,7 +9,7 @@ import java.util.Base64;
 
 @Getter
 @Configuration
-public class JwtProperties {
+public class JwtProperties { // 환경 변수 값을 필드로 구현
 
     @Value("${jwt.secretKey}")
     private String secretKey;

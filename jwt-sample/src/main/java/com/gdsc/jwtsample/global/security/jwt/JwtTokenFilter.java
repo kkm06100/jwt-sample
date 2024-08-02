@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class JwtTokenFilter extends OncePerRequestFilter {
+public class JwtTokenFilter extends OncePerRequestFilter { // Filter 역할을 수행하는 부분
 
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtReissueUtil jwtReissueUtil;
