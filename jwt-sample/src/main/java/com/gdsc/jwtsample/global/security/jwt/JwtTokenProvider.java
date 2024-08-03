@@ -24,7 +24,7 @@ public class JwtTokenProvider { // token 공급자
     public TokenResponse createToken(String accountId) {
         return TokenResponse
                 .builder()
-                .accescToken(createAccessToken(accountId))
+                .accessToken(createAccessToken(accountId))
                 .refreshToken(createRefreshToken(accountId))
                 .build();
     }

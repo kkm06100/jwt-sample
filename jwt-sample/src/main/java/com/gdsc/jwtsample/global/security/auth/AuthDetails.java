@@ -1,17 +1,21 @@
 package com.gdsc.jwtsample.global.security.auth;
 
+import com.gdsc.jwtsample.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     private final String accountId;
-
+    private final User user;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

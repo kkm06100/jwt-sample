@@ -34,7 +34,7 @@ public class JwtReissueUtil { // 토큰 관리자
         String accountId = getId(refreshToken);
 
         return TokenResponse.builder() // 토큰 제작
-                .accescToken(jwtTokenProvider.createAccessToken(accountId))
+                .accessToken(jwtTokenProvider.createAccessToken(accountId))
                 .refreshToken(refreshToken)
                 .build();
     }

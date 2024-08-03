@@ -1,11 +1,12 @@
 package com.gdsc.jwtsample.domain.auth.domain;
 
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 import org.springframework.data.redis.core.RedisHash;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @RedisHash
 public class RefreshToken {

@@ -1,5 +1,6 @@
 package com.gdsc.jwtsample.global.security.jwt;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,11 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter { // Filter 역할을 수행하는 부분
 
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtReissueUtil jwtReissueUtil;
+
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
