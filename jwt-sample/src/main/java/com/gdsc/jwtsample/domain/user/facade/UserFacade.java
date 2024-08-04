@@ -17,12 +17,12 @@ public class UserFacade {
     public Optional<User> getCurrentUser() {
         // 인증 가능한 유저를 확인
         String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.getUserByAccountId(accountId);
+        return userRepository.findByAccountId(accountId);
     }
 
     public User getByAccountId(String accontId){
         // 유저 검색
-        return userRepository.getUserByAccountId(accontId).orElseThrow(
+        return userRepository.findByAccountId(accontId).orElseThrow(
                 ()->new UsernameNotFoundException("")
         );
     }
@@ -35,7 +35,7 @@ public class UserFacade {
 
     public void checkUserExists(String accountId) {
         // 유저가 없는지 확인
-        if (userRepository.getUserByAccountId(accountId).isPresent()) {
+        if (userRepository.findByAccountId(accountId).isPresent()) {
             throw new RuntimeException("");
         }
     }

@@ -10,4 +10,5 @@ import lombok.Getter;
 public class SignInDto {
     private String accountId;
     private String password;
+    private String deviceToken;
 }

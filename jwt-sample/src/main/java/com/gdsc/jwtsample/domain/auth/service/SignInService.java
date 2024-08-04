@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+
 @Service
 @RequiredArgsConstructor
 public class SignInService {
@@ -21,12 +22,17 @@ public class SignInService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public TokenResponse signIn(SignInDto request) {
+    public TokenResponse execute(SignInDto request) {
 
         User user = userRepository.findByAccountId(request.getAccountId())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
 
-
+        user = User.builder().
+                accountId(user.getAccountId()).
+                password(user.getPassword()).
+                email(user.getEmail()).
+                deviceToken(request.getDeviceToken()).
+                build();
 
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
             throw new RuntimeException();

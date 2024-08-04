@@ -17,7 +17,7 @@ public class SignUpService {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
-    public TokenResponse signUp(SignUpDto signUpDto){
+    public TokenResponse execute(SignUpDto signUpDto){
         userFacade.checkUserExists(signUpDto.getAccountId());
 
 
